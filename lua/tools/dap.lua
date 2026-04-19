@@ -48,7 +48,7 @@ require("nvim-dap-virtual-text").setup()
 
 -- Mason DAP
 require("mason-nvim-dap").setup({
-  ensure_installed = { "codelldb", "cpptools" },
+  ensure_installed = { "codelldb", "cpptools", "python" },
   automatic_installation = true,
 })
 
@@ -102,3 +102,21 @@ vim.keymap.set("n", "<leader>dx", function()
   dapui.close()
 end, { desc = "Terminate debug session" })
 
+
+-- =========================
+-- Python debugging
+-- =========================
+
+local venv = os.getenv("VIRTUAL_ENV")
+local python_path = venv and (venv .. "/bin/python") or vim.fn.exepath("python3")
+
+require("dap-python").setup(python_path)
+
+-- Optional: keymaps for Python test debugging
+vim.keymap.set("n", "<leader>dpt", function()
+  require("dap-python").test_method()
+end, { desc = "Debug Python test method" })
+
+vim.keymap.set("n", "<leader>dpc", function()
+  require("dap-python").test_class()
+end, { desc = "Debug Python test class" })

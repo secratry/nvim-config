@@ -1,0 +1,24 @@
+return {
+  { "nvim-telescope/telescope.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      {"nvim-telescope/telescope-fzf-native.nvim", build = 'make'}
+    },
+    config = function()
+      vim.keymap.set("n","<leader>ff", require('telescope.builtin').find_files, { desc = 'Telescope find files' })
+      vim.keymap.set("n","<leader>fb", require('telescope.builtin').buffers, { desc = 'Telescope find buffers' })
+      vim.keymap.set("n","<leader>fg", require('telescope.builtin').live_grep, { desc = 'Telescope find grep' })
+      vim.keymap.set("n","<leader>fw", require('telescope.builtin').grep_string, { desc = 'Telescope find string' })
+      vim.keymap.set("n","<leader>fr", require('telescope.builtin').lsp_references, { desc = 'Telescope find references' })
+      vim.keymap.set("n","<leader>fi", require('telescope.builtin').lsp_incoming_calls, { desc = 'Telescope find incoming calls' })
+      vim.keymap.set("n","<leader>fo", require('telescope.builtin').lsp_outgoing_calls, { desc = 'Telescope find outgoing calls' })
+      vim.keymap.set("n","<leader>fh", require('telescope.builtin').help_tags, { desc = 'Telescope find help' })
+      vim.keymap.set("n","<leader>en", function()
+        require('telescope.builtin').find_files {
+          cwd = vim.fn.stdpath("config")
+        }
+      end, { desc = 'Telescope find nvim config' })
+    end
+  },
+}
+

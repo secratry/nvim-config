@@ -10,7 +10,7 @@ return {
       "nvim-neotest/nvim-nio",   -- REQUIRED
     },
     config = function()
-      require("config.dap")
+      require("tools.dap")
     end,
   },
 }

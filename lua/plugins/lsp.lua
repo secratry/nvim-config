@@ -1,5 +1,3 @@
--- lua/plugins/lsp.lua
-
 return {
   {
     "neovim/nvim-lspconfig",
@@ -9,7 +7,7 @@ return {
       "saghen/blink.cmp",
     },
     config = function()
-      require("config.lsp")
+      require("lsp")
     end,
   },
 }

@@ -6,7 +6,7 @@ return {
     },
     build = "make tiktoken",
     opts = {
-      require("config.copilotchat"),
+      require("core.copilotchat"),
     },
   },
 }
