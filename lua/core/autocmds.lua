@@ -1,5 +1,6 @@
 -- Format on save
-vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave", "TextChangedI" }, {
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.py",
   callback = function(args)
     require("conform").format({
       bufnr = args.buf,
@@ -9,8 +10,9 @@ vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave", "TextChangedI" }, {
   end,
 })
 
--- Lint after save / leaving insert
-vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
+-- Lint after save 
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = "*.py",
   callback = function()
     require("lint").try_lint()
   end,

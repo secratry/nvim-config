@@ -27,7 +27,13 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo.shiftwidth = 4
     vim.bo.tabstop = 4
     vim.bo.softtabstop = 4
+    vim.bo.indentexpr = ""
     vim.bo.autoindent = true
     vim.bo.smartindent = true
+    vim.bo.cindent = false
+    -- prevent weird newline/comment continuation
+    vim.opt_local.formatoptions:remove({ "o", "r" })
+    -- prevent weird completion side effects
+    vim.opt_local.completeopt = { "menu", "menuone", "noselect" }
   end,
 })

@@ -97,19 +97,37 @@ end, { desc = "Run pytest" })
 -- FORMAT & RUFF (CLEAN)
 -- =========================
 
-local function run_ruff(args)
-  local file = vim.api.nvim_buf_get_name(0)
+-- Format + fix on save (Python only)
+vim.api.nvim_create_autocmd("BufWritePre", {
+  callback = function(args)
+    local ft = vim.bo[args.buf].filetype
 
-  vim.system(
-    vim.list_extend({ "ruff" }, args),
-    { text = true },
-    function()
-      vim.schedule(function()
-        vim.cmd("edit!")
-      end)
+    if ft == "python" then
+      -- Ruff fixes
+      vim.system({ "ruff", "check", "--fix", vim.api.nvim_buf_get_name(args.buf) })
+
+      -- Format
+      require("conform").format({
+        bufnr = args.buf,
+        async = false,
+      })
     end
-  )
-end
+  end,
+})
+
+-- Mypy lint (after save)
+vim.api.nvim_create_autocmd("BufWritePost", {
+  callback = function()
+    require("lint").try_lint()
+  end,
+})
+
+-- Optional: live lint while typing
+vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
+  callback = function()
+    require("lint").try_lint()
+  end,
+})
 
 -- Format
 vim.keymap.set("n", "<leader>rf", function()
@@ -118,7 +136,8 @@ end, { desc = "Format file" })
 
 -- Ruff safe fix
 vim.keymap.set("n", "<leader>ra", function()
-  run_ruff({ "check", "--fix", vim.fn.expand("%") })
+  vim.cmd("silent !ruff check --fix %")
+  vim.cmd("edit") -- Reload to apply fixes
 end)
 
 -- Ruff unsafe fix

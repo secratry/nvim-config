@@ -1,16 +1,18 @@
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-
+-- Pyright (IDE features only, no type checking)
 vim.lsp.config("pyright", {
-  capabilities = capabilities,
   settings = {
     python = {
       analysis = {
-        typeCheckingMode = "strict",
+        typeCheckingMode = "off", -- avoid conflict with mypy
+        autoImportCompletions = true,
       },
     },
   },
 })
 
-vim.lsp.config("ruff", {
-  capabilities = capabilities,
-})
+-- Ruff (lint + fixes)
+vim.lsp.config("ruff", {})
+
+-- Enable servers
+vim.lsp.enable("pyright")
+vim.lsp.enable("ruff")
