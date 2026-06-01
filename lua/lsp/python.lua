@@ -5,13 +5,22 @@ vim.lsp.config("pyright", {
       analysis = {
         typeCheckingMode = "off", -- avoid conflict with mypy
         autoImportCompletions = true,
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
       },
     },
   },
 })
 
--- Ruff (lint + fixes)
-vim.lsp.config("ruff", {})
+-- Ruff LSP (lint + fixes)
+vim.lsp.config("ruff", {
+  init_options = {
+    settings = {
+      -- Any extra CLI arguments for `ruff` go here.
+      args = {},
+    }
+  }
+})
 
 -- Enable servers
 vim.lsp.enable("pyright")
