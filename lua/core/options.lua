@@ -36,7 +36,6 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo.cindent = false
     -- prevent weird newline/comment continuation
     vim.opt_local.formatoptions:remove({ "o", "r" })
-    -- prevent weird completion side effects
-    vim.opt_local.completeopt = { "menu", "menuone", "noselect" }
+    -- Note: blink.cmp handles completion automatically; don't set completeopt manually
   end,
 })

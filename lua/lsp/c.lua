@@ -1,11 +1,25 @@
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- clangd configuration using native Neovim LSP API (0.11+)
+-- For hyperproductive C development
 
-require('lspconfig').clangd.setup {
-  capabilities = capabilities,
+vim.lsp.config("clangd", {
   cmd = {
     "clangd",
     "--background-index",
     "--clang-tidy",
     "--completion-style=detailed",
+    "--cross-file-rename",
+    "--header-insertion=iwyu",
+    "--pch-storage=memory",
+    "--function-arg-placeholders",
   },
-}
+  capabilities = require("blink.cmp").get_lsp_capabilities(),
+  -- Additional hyperproductive settings
+  init_options = {
+    clangdFileStatus = true,
+    usePlaceholders = true,
+    completeUnimported = true,
+    semanticHighlighting = true,
+  },
+})
+
+vim.lsp.enable("clangd")

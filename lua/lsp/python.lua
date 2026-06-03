@@ -1,5 +1,7 @@
 -- Pyright (IDE features only, no type checking)
+-- Hyperproductive settings for Python development
 vim.lsp.config("pyright", {
+  capabilities = require("blink.cmp").get_lsp_capabilities(),
   settings = {
     python = {
       analysis = {
@@ -7,6 +9,11 @@ vim.lsp.config("pyright", {
         autoImportCompletions = true,
         autoSearchPaths = true,
         useLibraryCodeForTypes = true,
+        -- Hyperproductivity
+        inlayHints = {
+          variableTypes = true,
+          functionReturnTypes = true,
+        },
       },
     },
   },
@@ -14,6 +21,7 @@ vim.lsp.config("pyright", {
 
 -- Ruff LSP (lint + fixes)
 vim.lsp.config("ruff", {
+  capabilities = require("blink.cmp").get_lsp_capabilities(),
   init_options = {
     settings = {
       -- Any extra CLI arguments for `ruff` go here.
