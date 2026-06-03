@@ -1,5 +1,8 @@
 # AGENTS.md - Neovim Configuration Guide
 
+## Changes
+Do not add, commit or push to git. 
+
 ## Launching
 Run Neovim with this configuration using:
 ```bash
