@@ -17,7 +17,10 @@ require('lazy').setup({
   spec = {
     -- Import all plugins from lua/plugins
     { import = "plugins" },
-
+    
+    -- Treesitter configuration
+    { import = "plugins.treesitter" },
+    
     -- Extra standalone plugins
     { 'lewis6991/gitsigns.nvim' },
     { 'nvim-lualine/lualine.nvim' },
