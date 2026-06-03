@@ -1,6 +1,6 @@
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-vim.lsp.config("clangd", {
+require('lspconfig').clangd.setup {
   capabilities = capabilities,
   cmd = {
     "clangd",
@@ -8,4 +8,4 @@ vim.lsp.config("clangd", {
     "--clang-tidy",
     "--completion-style=detailed",
   },
-})
+}

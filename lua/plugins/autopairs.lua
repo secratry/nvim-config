@@ -12,7 +12,7 @@ return {
       disable_filetype = { "TelescopePrompt" },
     })
 
-    local ok_cmp, cmp = pcall(require, "cmp")
+    local ok_cmp, cmp = pcall(require, "blink.cmp")
 
     if ok_cmp then
       local cmp_autopairs = require(
