@@ -25,6 +25,7 @@ require('lazy').setup({
     { 'lewis6991/gitsigns.nvim' },
     { 'nvim-lualine/lualine.nvim' },
     { 'folke/which-key.nvim' },
+    { 'folke/neoconf.nvim', cmd = 'Neoconf' },
   },
 })
 
