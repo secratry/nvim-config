@@ -1,5 +1,26 @@
 local M = {}
 
+-- ==========================================
+-- Window Navigation (Ctrl + h/j/k/l)
+-- ==========================================
+-- Quick window switching without needing Ctrl+w prefix
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window", silent = true })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to lower window", silent = true })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to upper window", silent = true })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window", silent = true })
+
+-- Also map for terminal mode to escape and navigate
+vim.keymap.set("t", "<C-h>", [[<C-\><C-n><C-w>h]], { desc = "Move to left window from terminal", silent = true })
+vim.keymap.set("t", "<C-j>", [[<C-\><C-n><C-w>j]], { desc = "Move to lower window from terminal", silent = true })
+vim.keymap.set("t", "<C-k>", [[<C-\><C-n><C-w>k]], { desc = "Move to upper window from terminal", silent = true })
+vim.keymap.set("t", "<C-l>", [[<C-\><C-n><C-w>l]], { desc = "Move to right window from terminal", silent = true })
+
+-- Easy window resizing with Alt + h/j/k/l
+vim.keymap.set("n", "<M-h>", "<C-w><", { desc = "Decrease window width", silent = true })
+vim.keymap.set("n", "<M-j>", "<C-w>-", { desc = "Decrease window height", silent = true })
+vim.keymap.set("n", "<M-k>", "<C-w>+", { desc = "Increase window height", silent = true })
+vim.keymap.set("n", "<M-l>", "<C-w>>", { desc = "Increase window width", silent = true })
+
 function M.setup_whichkey()
   -- Which-key groups using v3 API
   local wk = require("which-key")
